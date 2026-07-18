@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arafat's Heart 💖</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght=700&family=Poppins:wght=300;400;600&display=swap');
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #ff8fab, #ffb6c1, #ff69b4);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      color: #fff;
+      overflow-x: hidden;
+      text-align: center;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .floating-hearts { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
+    .heart-bg { position: absolute; font-size: 28px; opacity: 0.4; animation: floatHeart 15s linear infinite; filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5)); }
+    @keyframes floatHeart { 0% { transform: translateY(100vh) rotate(0deg); } 100% { transform: translateY(-100vh) rotate(360deg); } }
+
+    .container {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+      padding: 40px 20px;
+      box-sizing: border-box;
+    }
+
+    .heart { font-size: 85px; animation: heartbeat 1.2s infinite; filter: drop-shadow(0 0 25px rgba(255,255,255,0.8)); user-select: none; }
+    @keyframes heartbeat { 0%,100% { transform: scale(1); } 50% { transform: scale(1.25); } }
+
+    .progress-container {
+      width: 250px;
+      height: 10px;
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 10px;
+      margin-top: 20px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    .progress-bar {
+      width: 0%;
+      height: 100%;
+      background: #ff1493;
+      border-radius: 10px;
+      animation: loadProgress 2.5s linear forwards;
+    }
+    @keyframes loadProgress {
+      0% { width: 0%; }
+      100% { width: 100%; }
+    }
+
+    .romantic-text {
+      font-family: 'Dancing Script', cursive;
+      font-size: 40px;
+      line-height: 1.6;
+      margin: 30px 0;
+      min-height: 160px;
+      text-shadow: 0 0 20px rgba(255,255,255,0.9);
+    }
+
+    h1 { font-size: 42px; margin: 20px 0; font-weight: 600; text-shadow: 0 0 20px rgba(255,20,147,0.6); }
+
+    .letter-card {
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 30px;
+      max-width: 500px;
+      width: 90%;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      font-family: 'Poppins', sans-serif;
+      line-height: 1.8;
+      font-size: 18px;
+      text-align: left;
+      margin-bottom: 30px;
+      animation: pop 0.5s ease;
+    }
+
+    .letter-card h2 {
+      font-family: 'Dancing Script', cursive;
+      font-size: 36px;
+      margin-top: 0;
+      text-align: center;
+      color: #fff;
+    }
+
+    .nav-buttons { margin-top: 30px; display: flex; gap: 15px; }
+    
+    button {
+      padding: 14px 35px;
+      font-size: 18px;
+      font-weight: 600;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 25px rgba(0,0,0,0.25);
+    }
+
+    .nav-btn, #yesBtn { background: #ff1493; color: white; }
+    
+    .proposal-btn-container {
+      position: relative;
+      width: 100%;
+      height: 100px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 30px;
+    }
+
+    #noBtn { background: #ffffff; color: #ff1493; position: absolute; }
+
+    .happy { font-size: 100px; animation: pop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+    @keyframes pop { 0% { transform: scale(0.1); } 100% { transform: scale(1); } }
+  </style>
+</head>
+<body>
+
+  <div class="floating-hearts" id="heartsContainer"></div>
+
+  <div id="screen1" class="container">
+    <div class="heart">💖</div>
+    <h1>Loading Arafat's Heart...</h1>
+    <div class="progress-container">
+      <div class="progress-bar"></div>
+    </div>
+  </div>
+
+  <div id="romanticPages" class="container" style="display:none;">
+    <div class="heart">💕</div>
+    <h1>Welcome to Arafat's Heart</h1>
+    <p id="romanticText" class="romantic-text"></p>
+    <div class="nav-buttons">
+      <button class="nav-btn" onclick="prevPage()">← Previous</button>
+      <button class="nav-btn" onclick="nextPage()">Next 💖 →</button>
+    </div>
+  </div>
+
+  <div id="letterPage" class="container" style="display:none;">
+    <div class="heart">✉️</div>
+    <h1>A Special Note for You</h1>
+    
+    <div class="letter-card">
+      <h2>Dear Niddra, 🌸</h2>
+      <p>
+        জানি না কীভাবে বলব, তবে আমার এই ছোট্ট জীবনে তোর জায়গাটা যে কতটা স্পেশাল তা হয়তো তোকে কখনো বুঝিয়ে বলা হয়নি। 
+        প্রতিটা দিন তোর সাথে কথা বলা, তোর ঐ মিষ্টি হাসি আর তোর পাগলামিগুলো আমার ভীষণ চেনা আর প্রিয় হয়ে উঠেছে। 
+        <br><br>
+        তুই ছাড়া আমার চারপাশটা বড্ড ফ্যাকাশে লাগে। তোর উপস্থিতি আমার জীবনে এক অদ্ভুত রকমের শান্তি এনে দেয়।
+        তোর চোখের দিকে তাকালে আমি নিজেকে হারিয়ে ফেলি তোর মাঝে।
+        এই মনটা তোকে অনেক কিছু বলতে চায়। কিন্তু তোর সামনে গেলে সবকিছু ভুলে যায়। সেই সাথে ভুলে যায় সব কষ্ট।
+        <br><br>
+        আজ আর নিজের মনের কথা লুকিয়ে রাখতে পারলাম না। তাই এইভাবে প্রকাশ করলাম। আমার জীবনের বাকিটা পথ তোর হাত ধরে হাঁটতে চাই, <b>Niddra</b>।
+      </p>
+    </div>
+
+    <div class="nav-buttons">
+      <button class="nav-btn" onclick="backToTexts()">← Back</button>
+      <button class="nav-btn" onclick="goToProposal()">Read Next 💘</button>
+    </div>
+  </div>
+
+  <div id="proposalPage" class="container" style="display:none;">
+    <h1 id="proposalTitle">Do You Love Me, Niddra? 💘</h1>
+    
+    <div class="proposal-btn-container" id="btnWrapper">
+      <button id="yesBtn" onclick="yesClicked()">Yes 💖</button>
+      <button id="noBtn" onmouseover="moveNoButton()" onclick="moveNoButton()" ontouchstart="moveNoButton()">No</button>
+    </div>
+
+    <div id="happyMessage" style="display:none; margin-top: 35px;">
+      <div class="happy">🥰💖🥰</div>
+      <h2 style="font-size: 32px; text-shadow: 0 0 10px rgba(255,255,255,0.5);">আমিও তোকে অনেক অনেক ভালোবাসি, Niddra! 💕</h2>
+    </div>
+  </div>
+
+  <script>
+    const myWhatsAppNumber = "8801323771700"; 
+
+    const texts = [
+      "Niddra, তুই চাঁদ আর আমি তারা 💖<br> অপূর্ণ আমি তোরে ছাড়া।",
+      "তোর ঐ মায়াবী চোখের দিকে তাকালে <br>আমি নিমেষেই যেন সারা দুনিয়া ভুলে যাই। ✨",
+      "Niddra, তুই আমার প্রতিটা সুন্দর সকালের <br>সবচেয়ে মিষ্টি কারণ। 🌸",
+      "তোর সাথে কাটানো প্রতিটা মুহূর্ত <br>আমার কাছে ঠিক রূপকথার স্বপ্নের মতো লাগে। 🏰",
+      "দুনিয়ার সব সুখের চেয়ে <br>তোর সাথে কাটানো কিছু মুহূর্ত আমার কাছে বেশি মূল্যবান , Niddra! 💞",
+      "আমি আমার জীবনের শেষ মুহূর্ত পর্যন্ত <br>তোর এই মায়াবী হাসির কারণ হয়ে থাকতে চাই, Niddra! 🌹",
+      "তুই আমার সব রোগের ঔষধ <br>Napa Extra!💞",
+      "হাজার মানুষের ভিড়েও আমার চোখ দুটি <br>শুধু তোকেই খুঁজে বেড়ায় সারাক্ষণ। 👀💗",
+      "আমার ছোট্ট এই জীবনের গল্পে <br>তুই হলি আমার সবচেয়ে প্রিয় অধ্যায়। 📖💞"
+    ];
+
+    let currentPage = 0;
+
+    function showPage() {
+      document.getElementById('romanticText').innerHTML = texts[currentPage];
+    }
+
+    function nextPage() {
+      if (currentPage < texts.length - 1) {
+        currentPage++;
+        showPage();
+      } else {
+        document.getElementById('romanticPages').style.display = 'none';
+        document.getElementById('letterPage').style.display = 'flex';
+      }
+    }
+
+    function prevPage() {
+      if (currentPage > 0) {
+        currentPage--;
+        showPage();
+      }
+    }
+
+    function backToTexts() {
+      document.getElementById('letterPage').style.display = 'none';
+      document.getElementById('romanticPages').style.display = 'flex';
+      currentPage = texts.length - 1;
+      showPage();
+    }
+
+    function goToProposal() {
+      document.getElementById('letterPage').style.display = 'none';
+      document.getElementById('proposalPage').style.display = 'flex';
+    }
+
+    function createFloatingHearts() {
+      const container = document.getElementById('heartsContainer');
+      const heartShapes = ['💖', '💝', '💕', '💗'];
+      for(let i = 0; i < 30; i++) {
+        const heart = document.createElement('div');
+        heart.className = 'heart-bg';
+        heart.textContent = heartShapes[Math.floor(Math.random() * heartShapes.length)];
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.animationDuration = (Math.random() * 10 + 10) + 's';
+        heart.style.animationDelay = '-' + Math.random() * 20 + 's';
+        container.appendChild(heart);
+      }
+    }
+
+    setTimeout(() => {
+      document.getElementById('screen1').style.display = 'none';
+      document.getElementById('romanticPages').style.display = 'flex';
+      showPage();
+    }, 2500);
+
+    function moveNoButton() {
+      const noBtn = document.getElementById('noBtn');
+      const padding = 100; 
+      const x = Math.random() * (window.innerWidth - padding * 2) + padding;
+      const y = Math.random() * (window.innerHeight - padding * 2) + padding;
+      
+      noBtn.style.position = 'fixed';
+      noBtn.style.left = x + 'px';
+      noBtn.style.top = y + 'px';
+    }
+
+    function yesClicked() {
+      const message = encodeURIComponent("Hey Arafat! I read your letter. Yes, I love you too! 🥰💖");
+      window.location.href = `https://wa.me/${myWhatsAppNumber}?text=${message}`;
+    }
+
+    createFloatingHearts();
+  </script>
+</body>
+</html>
