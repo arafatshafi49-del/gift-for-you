@@ -183,7 +183,7 @@
         প্রতিটা দিন তোর সাথে কথা বলা, তোর ঐ মিষ্টি হাসি আর তোর পাগলামিগুলো আমার ভীষণ চেনা আর প্রিয় হয়ে উঠেছে। 
         <br><br>
         তুই ছাড়া আমার চারপাশটা বড্ড ফ্যাকাশে লাগে। তোর উপস্থিতি আমার জীবনে এক অদ্ভুত রকমের শান্তি এনে দেয়।
-        تোর চোখের দিকে তাকালে আমি নিজেকে হারিয়ে ফেলি তোর মাঝে।
+        তোর চোখের দিকে তাকালে আমি নিজেকে হারিয়ে ফেলি তোর মাঝে।
         এই মনটা তোকে অনেক কিছু বলতে চায়। কিন্তু তোর সামনে গেলে সবকিছু ভুলে যায়। সেই সাথে ভুলে যায় সব কষ্ট।
         <br><br>
         আজ আর নিজের মনের কথা লুকিয়ে রাখতে পারলাম না। তাই এইভাবে প্রকাশ করলাম। আমার জীবনের বাকিটা পথ তোর হাত ধরে হাঁটতে চাই, <b>Niddra</b>।
@@ -211,7 +211,7 @@
   </div>
 
   <div class="visitor-counter">
-    Visitors: <span id="count">Loading...</span>
+    Visitors: <span id="count">1</span>
   </div>
 
   <script>
@@ -219,10 +219,10 @@
 
     const texts = [
       "Niddra, তুই চাঁদ আর আমি তারা 💖<br> অপূর্ণ আমি তোরে ছাড়া।",
-      "تোর ঐ মায়াবী চোখের দিকে তাকালে <br>আমি নিমেষেই যেন সারা দুনিয়া ভুলে যাই। ✨",
+      "তোর ঐ মায়াবী চোখের দিকে তাকালে <br>আমি নিমেষেই যেন সারা দুনিয়া ভুলে যাই। ✨",
       "Niddra, তুই আমার প্রতিটা সুন্দর সকালের <br>সবচেয়ে মিষ্টি কারণ। 🌸",
-      "تোর সাথে কাটানো প্রতিটা মুহূর্ত <br>আমার কাছে ঠিক রূপকথার স্বপ্নের মতো লাগে। 🏰",
-      "দুনিয়ার সব সুখের চেয়ে <br>তোর সাথে কাটানো কিছু মুহূর্ত আমার কাছে বেশি মূল্যবান , Niddra! 💞",
+      "তোর সাথে কাটানো প্রতিটা মুহূর্ত <br>আমার কাছে ঠিক রূপকথার স্বপ্নের মতো লাগে। 🏰",
+      "দুনিয়ার সব সুখের চেয়ে <br>তোর সাথে কাটানো কিছু মুহূর্ত আমার কাছে বেশি মূল্যবান, Niddra! 💞",
       "আমি আমার জীবনের শেষ মুহূর্ত পর্যন্ত <br>তোর এই মায়াবী হাসির কারণ হয়ে থাকতে চাই, Niddra! 🌹",
       "তুই আমার সব রোগের ঔষধ <br>Napa Extra!💞",
       "হাজার মানুষের ভিড়েও আমার চোখ দুটি <br>শুধু তোকেই খুঁজে বেড়ায় সারাক্ষণ। 👀💗",
@@ -300,16 +300,16 @@
       window.location.href = `https://wa.me/${myWhatsAppNumber}?text=${message}`;
     }
 
-    // Visitor Counter Fetch Functions
+    // LocalStorage Visitor Counter 
     function updateCounter() {
-      fetch('https://api.countapi.xyz/hit/arafat-heart-page/visits')
-        .then(res => res.json())
-        .then(res => {
-          document.getElementById('count').innerText = res.value;
-        })
-        .catch(() => {
-          document.getElementById('count').innerText = Math.floor(Math.random() * 5) + 1;
-        });
+      let visits = localStorage.getItem('site_visits');
+      if (visits) {
+        visits = parseInt(visits) + 1;
+      } else {
+        visits = 1;
+      }
+      localStorage.setItem('site_visits', visits);
+      document.getElementById('count').innerText = visits;
     }
 
     createFloatingHearts();
